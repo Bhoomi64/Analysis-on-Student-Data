@@ -154,3 +154,35 @@ models = {
         random_state=42
     )
 }
+
+# ============================================================
+# 10. TRAIN & EVALUATE ALL MODELS
+# ============================================================
+acc_results = {}
+
+for name, model in models.items():
+    acc_results[name] = evaluate_model(model, name)
+
+# ============================================================
+# 11. ACCURACY COMPARISON
+# ============================================================
+plt.figure(figsize=(9,5))
+sns.barplot(x=list(acc_results.keys()), y=list(acc_results.values()))
+plt.title("Model Accuracy Comparison")
+plt.ylabel("Accuracy")
+plt.ylim(0,1)
+plt.xticks(rotation=30)
+plt.show()
+# ============================================================
+# 12. BEST MODEL SELECTION (CORRECT)
+# ============================================================
+best_model_name = max(acc_results, key=acc_results.get)
+best_model = models[best_model_name]
+best_preds = best_model.predict(X_test)
+
+print("\n====== BEST MODEL ======")
+print("Model   :", best_model_name)
+print("Accuracy:", acc_results[best_model_name])
+
+print("\nClassification Report:\n")
+print(classification_report(y_test, best_preds))
