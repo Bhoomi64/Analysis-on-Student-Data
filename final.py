@@ -39,3 +39,41 @@ df.dropna(subset=["CGPA"], inplace=True)
 df["CGPA"] = df["CGPA"].clip(0, 10)
 
 df["High_Performer"] = (df["CGPA"] >= 8.5).astype(int)
+
+# ============================================================
+# 3. EXPLORATORY DATA VISUALIZATIONS
+# ============================================================
+
+# Daily Study Hours vs CGPA
+plt.figure(figsize=(7,5))
+sns.scatterplot(
+    x="daily study hours",
+    y="CGPA",
+    hue="High_Performer",
+    data=df
+)
+plt.title("Daily Study Hours vs CGPA")
+plt.show()
+
+# AI Tool Usage per Week vs CGPA
+plt.figure(figsize=(7,5))
+sns.boxplot(
+    x="Ai tool per week usuage",
+    y="CGPA",
+    data=df
+)
+plt.title("AI Tool Usage per Week vs CGPA")
+plt.show()
+
+
+# Correlation Heatmap
+plt.figure(figsize=(11,8))
+sns.heatmap(
+    df.select_dtypes(include=np.number).corr(),
+    cmap="coolwarm",
+    annot=False
+)
+plt.title("Numerical Feature Correlation Heatmap")
+plt.show()
+
+
