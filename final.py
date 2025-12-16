@@ -186,3 +186,22 @@ print("Accuracy:", acc_results[best_model_name])
 
 print("\nClassification Report:\n")
 print(classification_report(y_test, best_preds))
+
+
+# ============================================================
+# 13. FEATURE IMPORTANCE (ONLY IF SUPPORTED)
+# ============================================================
+if hasattr(best_model, "feature_importances_"):
+    imp_df = pd.DataFrame({
+        "Feature": X.columns,
+        "Importance": best_model.feature_importances_
+    }).sort_values(by="Importance", ascending=False)
+
+    plt.figure(figsize=(8,6))
+    sns.barplot(x="Importance", y="Feature", data=imp_df.head(10))
+    plt.title(f"Top 10 Important Features ({best_model_name})")
+    plt.show()
+else:
+    print(f"{best_model_name} does NOT support feature importance.")
+
+
