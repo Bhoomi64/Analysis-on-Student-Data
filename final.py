@@ -61,24 +61,14 @@ plt.title("Numerical Feature Correlation Heatmap")
 plt.show()
 
 
-# ============================================================
-# 4. ENCODE CATEGORICAL FEATURES
-# ============================================================
 le = LabelEncoder()
 cat_cols = df.select_dtypes(include="object").columns
 
 for col in cat_cols:
     df[col] = le.fit_transform(df[col].astype(str))
 
-# ============================================================
-# 5. FEATURES & TARGET
-# ============================================================
 X = df.drop(["CGPA", "High_Performer"], axis=1)
 y = df["High_Performer"]
-
-# ============================================================
-# 6. TRAIN-TEST SPLIT
-# ============================================================
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.25,
