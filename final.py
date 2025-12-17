@@ -149,10 +149,6 @@ print("Accuracy:", acc_results[best_model_name])
 print("\nClassification Report:\n")
 print(classification_report(y_test, best_preds))
 
-
-# ============================================================
-# 13. FEATURE IMPORTANCE (ONLY IF SUPPORTED)
-# ============================================================
 if hasattr(best_model, "feature_importances_"):
     imp_df = pd.DataFrame({
         "Feature": X.columns,
@@ -166,9 +162,6 @@ if hasattr(best_model, "feature_importances_"):
 else:
     print(f"{best_model_name} does NOT support feature importance.")
 
-# ============================================================
-# 14. DECISION TREE VISUALIZATION (CLEAR)
-# ============================================================
 tree_model = models["Decision Tree"]
 
 plt.figure(figsize=(36,18), dpi=150)
@@ -183,10 +176,6 @@ plot_tree(
 )
 plt.title("Decision Tree Visualization (Clear Spacing)", fontsize=20)
 plt.show()
-
-# ============================================================
-# 15. MODEL ACCURACY LIST (FOR REPORT)
-# ============================================================
 print("\nModel Accuracies:")
 for model, acc in acc_results.items():
     print(f"{model}: {acc*100:.2f}%")
