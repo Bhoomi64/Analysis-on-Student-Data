@@ -1,6 +1,3 @@
-# ============================================================
-# STUDENT PERFORMANCE PREDICTION USING ML (FINAL – STABLE)
-# ============================================================
 
 import pandas as pd
 import numpy as np
@@ -24,9 +21,6 @@ from sklearn.metrics import ConfusionMatrixDisplay
 
 sns.set(style="whitegrid")
 
-# ============================================================
-# 1. LOAD DATA
-# ============================================================
 df = pd.read_csv("python_project.csv")
 df.columns = df.columns.str.strip()
 df.info()
