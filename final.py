@@ -25,20 +25,13 @@ df = pd.read_csv("python_project.csv")
 df.columns = df.columns.str.strip()
 df.info()
 df.describe()
-# ============================================================
-# 2. TARGET VARIABLE (HIGH PERFORMER)
-# ============================================================
+
 df["CGPA"] = pd.to_numeric(df["CGPA"], errors="coerce")
 df.dropna(subset=["CGPA"], inplace=True)
 df["CGPA"] = df["CGPA"].clip(0, 10)
 
 df["High_Performer"] = (df["CGPA"] >= 8.5).astype(int)
 
-# ============================================================
-# 3. EXPLORATORY DATA VISUALIZATIONS
-# ============================================================
-
-# Daily Study Hours vs CGPA
 plt.figure(figsize=(7,5))
 sns.scatterplot(
     x="daily study hours",
@@ -49,7 +42,6 @@ sns.scatterplot(
 plt.title("Daily Study Hours vs CGPA")
 plt.show()
 
-# AI Tool Usage per Week vs CGPA
 plt.figure(figsize=(7,5))
 sns.boxplot(
     x="Ai tool per week usuage",
@@ -59,8 +51,6 @@ sns.boxplot(
 plt.title("AI Tool Usage per Week vs CGPA")
 plt.show()
 
-
-# Correlation Heatmap
 plt.figure(figsize=(11,8))
 sns.heatmap(
     df.select_dtypes(include=np.number).corr(),
