@@ -92,15 +92,25 @@ def evaluate_model(model, name):
     print("Recall   :", recall_score(y_test, preds))
     print("F1 Score :", f1_score(y_test, preds))
 
-    ConfusionMatrixDisplay.from_predictions(
-        y_test, preds,
-        display_labels=["Not Top", "Top Performer"],
-        cmap="Blues"
+    # Confusion Matrix
+    cm = confusion_matrix(y_test, preds)
+
+    plt.figure(figsize=(5,4))
+    sns.heatmap(
+        cm,
+        annot=True,
+        fmt="d",
+        cmap="Blues",
+        xticklabels=["Not Top", "Top Performer"],
+        yticklabels=["Not Top", "Top Performer"]
     )
+    plt.xlabel("Predicted Label")
+    plt.ylabel("Actual Label")
     plt.title(f"{name} - Confusion Matrix")
     plt.show()
 
     return acc
+
 
 models = {
     "Logistic Regression": LogisticRegression(max_iter=1000),
