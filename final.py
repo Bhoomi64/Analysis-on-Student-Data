@@ -76,16 +76,10 @@ X_train, X_test, y_train, y_test = train_test_split(
     stratify=y
 )
 
-# ============================================================
-# 7. SCALING
-# ============================================================
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# ============================================================
-# 8. MODEL EVALUATION FUNCTION
-# ============================================================
 def evaluate_model(model, name):
     model.fit(X_train, y_train)
     preds = model.predict(X_test)
@@ -108,9 +102,6 @@ def evaluate_model(model, name):
 
     return acc
 
-# ============================================================
-# 9. MODELS
-# ============================================================
 models = {
     "Logistic Regression": LogisticRegression(max_iter=1000),
     "KNN": KNeighborsClassifier(n_neighbors=11),
@@ -129,9 +120,6 @@ models = {
     )
 }
 
-# ============================================================
-# 10. TRAIN & EVALUATE ALL MODELS
-# ============================================================
 acc_results = {}
 
 for name, model in models.items():
